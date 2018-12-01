@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class VictumsController : MonoBehaviour {
 
@@ -11,6 +13,7 @@ public class VictumsController : MonoBehaviour {
     [SerializeField]
     Transform[] _victumPlaces;
 
+    List<VictumTypes> _nextVictums = new List<VictumTypes>();
     List<Victum> _victums = new List<Victum>();
 
     void Awake()
@@ -52,11 +55,23 @@ public class VictumsController : MonoBehaviour {
 
     void SpawnNewVictum(Transform spawnPoint)
     {
+        if (_nextVictums.Count == 0)
+        {
+            var types = (VictumTypes[])Enum.GetValues(typeof(VictumTypes));
+
+            foreach(VictumTypes type in types)
+                _nextVictums.Add(type);
+
+            Helpers.Shuffle(_nextVictums);
+        }
+
         GameObject victumBody = Instantiate(_victumPrefab, spawnPoint.position, Quaternion.identity, transform);
         _victums.Add(new Victum
         {
             body = victumBody.transform,
-            spawnPoint = spawnPoint
+            spawnPoint = spawnPoint,
+            type = _nextVictums[0]
         });
+        _nextVictums.RemoveAt(0);
     }
 }

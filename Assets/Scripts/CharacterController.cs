@@ -12,6 +12,8 @@ public class CharacterController : MonoBehaviour {
     float _pickUpDistance;
     [SerializeField]
     Transform _bodyPos;
+    [SerializeField]
+    Animator _animator;
 
     Rigidbody _rigidbody;
     Victum _victumInHands;
@@ -32,6 +34,13 @@ public class CharacterController : MonoBehaviour {
         {
             direction.Normalize();
             _rigidbody.velocity = direction * _speed;
+            _animator.SetBool("Move", true);
+
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        }
+        else
+        {
+            _animator.SetBool("Move", false);
         }
     }
 
@@ -50,6 +59,7 @@ public class CharacterController : MonoBehaviour {
                 if (Input.GetButtonDown("Submit"))
                 {
                     _victumInHands = closestVictum;
+                    _animator.SetBool("Carry", true);
                 }
             }
         } else
@@ -66,6 +76,7 @@ public class CharacterController : MonoBehaviour {
                         VictumsController.instance.KillVictum(_victumInHands);
                         Destroy(_victumInHands.body.gameObject);
                         _victumInHands = null;
+                        _animator.SetBool("Carry", false);
                     }
                 }
             }
