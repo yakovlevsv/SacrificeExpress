@@ -52,22 +52,18 @@ public class GameContext : MonoBehaviour {
         Animation animation = finishInfo.GetComponent<Animation>();
         if (playerPoints>=threeStarPoints)
         {
-            animation.Play("Victory03");
-            Debug.Log(3);
+            animation.Play("Victory03");       
         }else if(playerPoints>=twoStarPoints)
         {
-            animation.Play("Victory02");
-            Debug.Log(2);
+            animation.Play("Victory02");            
         }
         else if (playerPoints >= oneStarPoints)
         {
-            animation.Play("Victory01");
-            Debug.Log(1);
+            animation.Play("Victory01");            
         }
         else
         {
-            animation.Play("Lose");
-            Debug.Log(0);
+            animation.Play("Lose");            
         }
 
     }
