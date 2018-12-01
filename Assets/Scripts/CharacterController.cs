@@ -5,9 +5,18 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour {
 
     [SerializeField]
+    Transform[] _altars;
+    [SerializeField]
     float _speed;
+    [SerializeField]
+    float _pickUpDistance;
+    [SerializeField]
+    Transform _bodyPos;
 
     Rigidbody _rigidbody;
+    Victum _victumInHands;
+    bool _canPickUp;
+    bool _canThrow;
 
     void Awake()
     {
@@ -24,5 +33,60 @@ public class CharacterController : MonoBehaviour {
             direction.Normalize();
             _rigidbody.velocity = direction * _speed;
         }
+    }
+
+    void Update()
+    {
+        _canPickUp = false;
+        _canThrow = false;
+
+        if (_victumInHands == null)
+        {
+            Victum closestVictum = VictumsController.instance.GetClosestVictum(transform.position, _pickUpDistance);
+            if (closestVictum != null)
+            {
+                _canPickUp = true;
+
+                if (Input.GetButtonDown("Submit"))
+                {
+                    _victumInHands = closestVictum;
+                }
+            }
+        } else
+        {
+            _victumInHands.body.position = _bodyPos.position;
+
+            foreach (Transform alter in _altars)
+            {
+                if (Helpers.GetDistance(alter.position, transform.position) < _pickUpDistance)
+                {
+                    _canThrow = true;
+                    if (Input.GetButtonDown("Submit"))
+                    {
+                        VictumsController.instance.KillVictum(_victumInHands);
+                        Destroy(_victumInHands.body.gameObject);
+                        _victumInHands = null;
+                    }
+                }
+            }
+        }
+    }
+
+    private void OnGUI()
+    {
+        float scale = Screen.height / 400f;
+        GUI.matrix = Matrix4x4.Scale(Vector3.one * scale);
+
+        GUILayout.BeginArea(new Rect((Screen.width / scale / 2) - 50, (Screen.height / scale / 2), 100, 100));
+
+        if (_canPickUp)
+        {
+            GUILayout.Label("Press SPACE to pick up");
+        }
+        if (_canThrow)
+        {
+            GUILayout.Label("Press SPACE to throw");
+        }
+        GUILayout.EndArea();
     }
 }
