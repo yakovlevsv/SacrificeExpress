@@ -8,20 +8,28 @@ public class AltarsController : MonoBehaviour {
 
     public static AltarsController instance;
 
+    public TimeSpan ProcessTime { get { return TimeSpan.FromSeconds(_processTime); } }
+
     [SerializeField]
     int _startPeriod;
     [SerializeField]
     int _periodStep;
     [SerializeField]
     int _minPeriod;
+    [Header("Altar")]
+    [SerializeField]
+    float _processTime;
+    [SerializeField]
+    float _waitTime;
 
-    List<GameObject> _altars = new List<GameObject>();
+    List<Altar> _altars = new List<Altar>();
     int _altarIndex;
     int _period;
 
     void Awake()
     {
         instance = this;
+        _altars.AddRange(FindObjectsOfType<Altar>());
     }
 
     IEnumerator Start()
@@ -39,16 +47,17 @@ public class AltarsController : MonoBehaviour {
                 continue;
             }
 
-            // altar.AskVictum(GetNextVictum())
+            altar.Wait(GetNextVictum(), TimeSpan.FromSeconds(_waitTime));
             yield return new WaitForSeconds(_period);
 
             _period = Mathf.Max(_period - _periodStep, _minPeriod);
         }
     }
 
-    GameObject GetNextAltar()
+    Altar GetNextAltar()
     {
-        return _altars[_altarIndex++ % _altars.Count];
+        var sleepAltars = _altars.FindAll(a => a.IsSleep);
+        return sleepAltars[_altarIndex++ % sleepAltars.Count];
     }
 
     VictumTypes GetNextVictum()
@@ -69,7 +78,6 @@ public class AltarsController : MonoBehaviour {
 
     bool HasVictumType(VictumTypes type)
     {
-        // Todo: implement
-        return false;
+        return _altars.Find(a => a.IsWaiting && a.VictumType == type) != null;
     }
 }

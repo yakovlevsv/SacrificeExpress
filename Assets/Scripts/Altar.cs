@@ -5,17 +5,20 @@ using Random = UnityEngine.Random;
 
 public class Altar : MonoBehaviour
 {
-    private static readonly int[] sacrificeUsers = {1, 2, 3, 4};
+    public bool IsSleep { get { return _altarState == AltarStates.Sleep; } }
+    public bool IsWaiting { get { return _altarState == AltarStates.Waiting; } }
+    public VictumTypes VictumType { get { return _victumType; } }
 
-    public Animator anim;
+    [SerializeField]
+    Animator _animator;
 
-    private AltarStates altarState;
-    private DateTime startTime;
-    private GameObject sacrifice;
-    private int sacrificeUser;
-    private long timeNextState;
+    AltarStates _altarState;
+    DateTime _startStateTime;
+    GameObject _sacrifice;
+    VictumTypes _victumType;
+    TimeSpan _waitTime;
 
-    private enum AltarStates
+    enum AltarStates
     {
         Sleep,
         Waiting,
@@ -24,9 +27,8 @@ public class Altar : MonoBehaviour
 
     void Awake()
     {
-        sacrificeUser = sacrificeUsers[Random.Range(1, 4)];
-        startTime = DateTime.Now;
-        altarState = AltarStates.Sleep;
+        _startStateTime = DateTime.Now;
+        _altarState = AltarStates.Sleep;
     }
 
     void Update()
@@ -34,55 +36,40 @@ public class Altar : MonoBehaviour
         CheckStateTimeout();
     }
 
-    [ContextMenu("Process")]
     public void RunProcess()
     {
         ChangeState(AltarStates.Process);
     }
 
-    [ContextMenu("Sleep")]
     public void Sleep()
     {
         ChangeState(AltarStates.Sleep);
     }
 
-    [ContextMenu("Wait")]
-    public void WaitDebug()
+    public void Wait(VictumTypes victumType, TimeSpan waitTime)
     {
-        Wait(0);
-    }
-
-    public void Wait(int sacrificeId)
-    {
-        sacrificeUser = sacrificeId;
+        _waitTime = waitTime;
+        _victumType = victumType;
         ChangeState(AltarStates.Waiting);
     }
 
     void CheckStateTimeout()
     {
-        DateTime timeNow = DateTime.Now;
-
-        switch (altarState)
+        switch (_altarState)
         {
             case AltarStates.Waiting:
             {
-                TimeSpan time = TimeSpan.FromSeconds(10);
-                if (timeNow - startTime - time >= time)
-                {
-                    startTime = timeNow;
+                TimeSpan time = _waitTime;
+                if (DateTime.UtcNow - _startStateTime >= time)
                     ChangeState(AltarStates.Sleep);
-                }
 
                 break;
             }
             case AltarStates.Process:
             {
-                TimeSpan time = TimeSpan.FromSeconds(10);
-                if (timeNow - startTime - time >= time)
-                {
-                    startTime = timeNow;
+                TimeSpan time = AltarsController.instance.ProcessTime;
+                if (DateTime.UtcNow - _startStateTime >= time)
                     ChangeState(AltarStates.Sleep);
-                }
 
                 break;
             }
@@ -91,24 +78,25 @@ public class Altar : MonoBehaviour
 
     void ChangeState(AltarStates newAltarState)
     {
-        altarState = newAltarState;
+        _altarState = newAltarState;
+        _startStateTime = DateTime.UtcNow;
 
-        switch (altarState)
+        switch (_altarState)
         {
             case AltarStates.Process:
             {
-                anim.SetTrigger("Process");
-                anim.SetInteger("ProcessType", sacrificeUser);
+                _animator.SetTrigger("Process");
+                _animator.SetInteger("ProcessType", (int)_victumType);
                 break;
             }
             case AltarStates.Waiting:
             {
-                anim.SetTrigger("Wait");
+                _animator.SetTrigger("Wait");
                 break;
             }
             case AltarStates.Sleep:
             {
-                anim.SetTrigger("Sleep");
+                _animator.SetTrigger("Sleep");
                 break;
             }
         }

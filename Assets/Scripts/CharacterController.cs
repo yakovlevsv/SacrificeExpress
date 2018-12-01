@@ -60,6 +60,9 @@ public class CharacterController : MonoBehaviour {
                 {
                     _victumInHands = closestVictum;
                     _animator.SetBool("Carry", true);
+                    var colliders = _victumInHands.body.GetComponentsInChildren<Collider>();
+                    foreach(Collider collider in colliders)
+                        Destroy(collider);
                 }
             }
         } else
