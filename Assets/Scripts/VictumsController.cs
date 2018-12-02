@@ -9,14 +9,15 @@ public class VictumsController : MonoBehaviour {
     public static VictumsController instance;
 
     [Serializable]
-    public class VictumPrefabs
+    public class VictumInfo
     {
         public VictumTypes type;
         public GameObject prefab;
+        public float speedCoef;
     }
 
     [SerializeField]
-    VictumPrefabs[] _victumPrefab;
+    VictumInfo[] _victumPrefab;
     [SerializeField]
     Transform[] _victumPlaces;
 
@@ -74,7 +75,7 @@ public class VictumsController : MonoBehaviour {
 
         var victumType = _nextVictums[0];
         _nextVictums.RemoveAt(0);
-        GameObject prefab = GetVictumPrefab(victumType);
+        GameObject prefab = GetVictumInfo(victumType).prefab;
 
         GameObject victumBody = Instantiate(prefab, spawnPoint.position, Quaternion.identity, transform);
         _victums.Add(new Victum
@@ -83,11 +84,10 @@ public class VictumsController : MonoBehaviour {
             spawnPoint = spawnPoint,
             type = victumType
         });
-        _nextVictums.RemoveAt(0);
     }
 
-    public GameObject GetVictumPrefab(VictumTypes victumType)
+    public VictumInfo GetVictumInfo(VictumTypes victumType)
     {
-        return Array.Find(_victumPrefab, vp => vp.type == victumType).prefab;
+        return Array.Find(_victumPrefab, vp => vp.type == victumType);
     }
 }
