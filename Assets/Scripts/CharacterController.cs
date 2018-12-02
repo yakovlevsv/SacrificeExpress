@@ -44,8 +44,9 @@ public class CharacterController : MonoBehaviour {
             if (_victumInHands != null)
                 speedCoef *= VictumsController.instance.GetVictumInfo(_victumInHands.type).speedCoef;
 
-
-            _rigidbody.velocity = direction * _speed * speedCoef;
+			Vector3 newSpeed = direction * _speed * speedCoef;
+			newSpeed.y = _rigidbody.velocity.y;
+            _rigidbody.velocity = newSpeed;
             _animator.SetBool("Move", true);
 
             if (_timePrevStep + TimeSpan.FromSeconds(0.3f) < DateTime.UtcNow)
@@ -58,7 +59,9 @@ public class CharacterController : MonoBehaviour {
         }
         else
         {
-            _rigidbody.velocity = Vector3.zero;
+			Vector3 newSpeed = Vector3.zero;
+			newSpeed.y = _rigidbody.velocity.y;
+            _rigidbody.velocity = newSpeed;
             _rigidbody.angularVelocity = Vector3.zero;
             _animator.SetBool("Move", false);
         }
