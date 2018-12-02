@@ -426,8 +426,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4683165071240560}
   - component: {fileID: 95272062246648876}
+  - component: {fileID: 65552714967797578}
   m_Layer: 0
-  m_Name: 8pussy
+  m_Name: SmalLady
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +606,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1729925995015440}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.065, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children:
   - {fileID: 4762749115735998}
@@ -659,7 +660,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350079592924144}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.133, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4614053824198614}
@@ -824,6 +825,18 @@ Transform:
   m_Father: {fileID: 4350566181197602}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65552714967797578
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1972332501810554}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.6}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95272062246648876
 Animator:
   serializedVersion: 3
@@ -833,7 +846,7 @@ Animator:
   m_GameObject: {fileID: 1972332501810554}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: dc0765078f1d92f47b39a9910bb7b8bc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a30dafa51dc03924fbd5338f5962e202, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

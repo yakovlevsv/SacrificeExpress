@@ -6,7 +6,6 @@ public enum VictumTypes
 {
     BigLady,
     TinyLady,
-    TinyMan,
     BigMan,
 }
 

@@ -79,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272794779729648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.5, z: 23.2}
+  m_LocalPosition: {x: 5, y: 0, z: 23.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4305599486782250}
@@ -108,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1084476331859496}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0.5, z: 23.2}
+  m_LocalPosition: {x: -5, y: 0, z: 23.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4305599486782250}
@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390628186570798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 23.2}
+  m_LocalPosition: {x: 0, y: 0, z: 23.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4305599486782250}
@@ -143,14 +143,11 @@ MonoBehaviour:
     prefab: {fileID: 1845411627021280, guid: 9578645fe98fbf64c938526bcaf75e19, type: 2}
     speedCoef: 0.5
   - type: 1
-    prefab: {fileID: 1310349997230558, guid: a6c84f0f88a045248b846361f3fc275b, type: 2}
+    prefab: {fileID: 1972332501810554, guid: fe1d3e556673c1646b43046f27987ab6, type: 2}
     speedCoef: 1
   - type: 2
     prefab: {fileID: 1225958535944290, guid: 1e57442da6f3550479a0961482ed16c4, type: 2}
     speedCoef: 1
-  - type: 3
-    prefab: {fileID: 1310349997230558, guid: 7cad8d332f1a73b4ebb923b723bacbc5, type: 2}
-    speedCoef: 0.5
   _victumPlaces:
   - {fileID: 4508850963570400}
   - {fileID: 4594819317767596}

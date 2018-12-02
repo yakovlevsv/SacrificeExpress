@@ -84,7 +84,6 @@ public class VictumsController : MonoBehaviour {
             spawnPoint = spawnPoint,
             type = victumType
         });
-        _nextVictums.RemoveAt(0);
     }
 
     public VictumInfo GetVictumInfo(VictumTypes victumType)
