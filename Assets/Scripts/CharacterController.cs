@@ -36,7 +36,12 @@ public class CharacterController : MonoBehaviour {
         {
             if (direction.magnitude > 1f)
                 direction.Normalize();
-            _rigidbody.velocity = direction * _speed;
+            float speedCoef = SlowManager.instance.GetSpeed(transform.position);
+            if (_victumInHands != null)
+                speedCoef *= VictumsController.instance.GetVictumInfo(_victumInHands.type).speedCoef;
+
+
+            _rigidbody.velocity = direction * _speed * speedCoef;
             _animator.SetBool("Move", true);
 
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);

@@ -58,7 +58,7 @@ public class Altar : MonoBehaviour
         _waitTime = waitTime;
         _victumType = victumType;
 
-        _waitObject = Instantiate(VictumsController.instance.GetVictumPrefab(victumType), _victumRoot);
+        _waitObject = Instantiate(VictumsController.instance.GetVictumInfo(victumType).prefab, _victumRoot);
         ChangeState(AltarStates.Waiting);
     }
 
