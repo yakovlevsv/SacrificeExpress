@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class CharacterController : MonoBehaviour {
     Victum _victumInHands;
     bool _canPickUp;
     bool _canThrow;
+    DateTime _timePrevStep;
 
     void Awake()
     {
@@ -43,6 +45,12 @@ public class CharacterController : MonoBehaviour {
 
             _rigidbody.velocity = direction * _speed * speedCoef;
             _animator.SetBool("Move", true);
+
+            if (_timePrevStep + TimeSpan.FromSeconds(0.3f) < DateTime.UtcNow)
+            {
+                _timePrevStep = DateTime.UtcNow;
+                SoundManager.PlaySoundUI("walk");
+            }
 
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }

@@ -12,7 +12,6 @@ public class GameContext : MonoBehaviour {
 
     public GameObject finishInfo;
 
-
     public int oneStarPoints;
     public int twoStarPoints;
     public int threeStarPoints;
@@ -28,6 +27,8 @@ public class GameContext : MonoBehaviour {
     {
         instance = this;
         finishInfo.SetActive(false);
+
+        SoundManager.PlayMusic("MusicGame");
     }
 
     // Update is called once per frame
