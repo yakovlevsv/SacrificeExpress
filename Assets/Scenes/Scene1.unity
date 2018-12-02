@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -546,6 +546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170076735}
   - component: {fileID: 170076734}
+  - component: {fileID: 170076736}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -562,7 +563,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.066082254, g: 0.07322347, b: 0.31132078, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -571,7 +572,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.467
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -603,6 +604,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!111 &170076736
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170076733}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a76bab3ab79363040b83befb85e96653, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a76bab3ab79363040b83befb85e96653, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &183145000
 Prefab:
   m_ObjectHideFlags: 0
@@ -1794,7 +1810,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1455499859193324, guid: c81e7803c13dbd548a886f1e16c50a1b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198595158501470160, guid: c81e7803c13dbd548a886f1e16c50a1b,
+        type: 2}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 198595158501470160, guid: c81e7803c13dbd548a886f1e16c50a1b,
+        type: 2}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c81e7803c13dbd548a886f1e16c50a1b, type: 2}
@@ -2057,16 +2083,6 @@ Prefab:
     - target: {fileID: 4200603037004752, guid: 131610fe378dfc34eb8c5c82c8b0cd75, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 65534014402724908, guid: 131610fe378dfc34eb8c5c82c8b0cd75,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65924794469749338, guid: 131610fe378dfc34eb8c5c82c8b0cd75,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 131610fe378dfc34eb8c5c82c8b0cd75, type: 2}
@@ -3289,19 +3305,10 @@ Prefab:
       propertyPath: _altars.Array.data[1]
       value: 
       objectReference: {fileID: 2126728330}
-    - target: {fileID: 1163867695865864, guid: ddf8880986316ba4ba0412872f73bbd0, type: 2}
-      propertyPath: m_TagString
-      value: Chest
-      objectReference: {fileID: 0}
-    - target: {fileID: 114937092985885672, guid: ddf8880986316ba4ba0412872f73bbd0,
+    - target: {fileID: 108705992225018212, guid: ddf8880986316ba4ba0412872f73bbd0,
         type: 2}
-      propertyPath: joinPoint
-      value: 
-      objectReference: {fileID: 1558153433}
-    - target: {fileID: 54561473354105350, guid: ddf8880986316ba4ba0412872f73bbd0,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 80
+      propertyPath: m_Intensity
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf8880986316ba4ba0412872f73bbd0, type: 2}
@@ -3913,11 +3920,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395cce1cea808a54c8df538cf4ff0a21, type: 3}
   m_IsPrefabAsset: 0
---- !u!4 &1558153433 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4795739062059830, guid: ddf8880986316ba4ba0412872f73bbd0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1317492376}
 --- !u!1001 &1571030465
 Prefab:
   m_ObjectHideFlags: 0
@@ -4395,7 +4397,7 @@ Terrain:
   m_GameObject: {fileID: 1827572960}
   m_Enabled: 1
   serializedVersion: 3
-  m_TerrainData: {fileID: 15600000, guid: c8f99b7f1872c2642ac868dbf1000fd8, type: 2}
+  m_TerrainData: {fileID: 0}
   m_TreeDistance: 2000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5

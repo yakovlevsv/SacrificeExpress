@@ -34,7 +34,8 @@ public class CharacterController : MonoBehaviour {
         var direction = new Vector3(h, 0, v);
         if (direction != Vector3.zero)
         {
-            direction.Normalize();
+            if (direction.magnitude > 1f)
+                direction.Normalize();
             _rigidbody.velocity = direction * _speed;
             _animator.SetBool("Move", true);
 
@@ -42,6 +43,8 @@ public class CharacterController : MonoBehaviour {
         }
         else
         {
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
             _animator.SetBool("Move", false);
         }
     }
