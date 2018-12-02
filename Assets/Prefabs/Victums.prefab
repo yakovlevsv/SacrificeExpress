@@ -141,12 +141,16 @@ MonoBehaviour:
   _victumPrefab:
   - type: 0
     prefab: {fileID: 1845411627021280, guid: 9578645fe98fbf64c938526bcaf75e19, type: 2}
+    speedCoef: 0.5
   - type: 1
     prefab: {fileID: 1310349997230558, guid: a6c84f0f88a045248b846361f3fc275b, type: 2}
+    speedCoef: 1
   - type: 2
     prefab: {fileID: 1225958535944290, guid: 1e57442da6f3550479a0961482ed16c4, type: 2}
+    speedCoef: 1
   - type: 3
     prefab: {fileID: 1310349997230558, guid: 7cad8d332f1a73b4ebb923b723bacbc5, type: 2}
+    speedCoef: 0.5
   _victumPlaces:
   - {fileID: 4508850963570400}
   - {fileID: 4594819317767596}
