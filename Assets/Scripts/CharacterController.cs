@@ -27,7 +27,9 @@ public class CharacterController : MonoBehaviour {
         _rigidbody = GetComponentInChildren<Rigidbody>();
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
+        if (GameContext.instance.finished) return;
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");

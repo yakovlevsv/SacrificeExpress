@@ -17,7 +17,7 @@ public class GameContext : MonoBehaviour {
     public int twoStarPoints;
     public int threeStarPoints;
     public int playerPoints;
-    private bool finished = false;
+    public bool finished = false;
 
     private static string timeText = "Time left: ";
     private static string scoreText = "Score: ";
