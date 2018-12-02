@@ -69,15 +69,13 @@ public class CharacterController : MonoBehaviour {
             }
         } else
         {           
-
             _victumInHands.body.position = _bodyPos.position;
             _victumInHands.body.parent = joinPoint;
-               
 
-            foreach (Transform alter in _altars)
-            {
-                if (Helpers.GetDistance(alter.position, transform.position) < _pickUpDistance)
-                {
+           Altar altar= AltarsController.instance.GetClosestAltar(transform.position, _pickUpDistance);
+
+            if (altar != null)
+            {            
                     _canThrow = true;
                     if (Input.GetButtonDown("Submit"))
                     {
@@ -85,8 +83,10 @@ public class CharacterController : MonoBehaviour {
                         Destroy(_victumInHands.body.gameObject);
                         _victumInHands = null;
                         _animator.SetBool("Carry", false);
-                    }
-                }
+                    altar.RunProcess();
+                    GameContext.instance.AddPoint();
+                }              
+
             }
         }
     }

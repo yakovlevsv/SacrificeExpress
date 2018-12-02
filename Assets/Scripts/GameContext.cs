@@ -8,6 +8,7 @@ public class GameContext : MonoBehaviour {
 
     public static GameContext instance;
     public Text text;
+    public Text score;
 
     public GameObject finishInfo;
 
@@ -18,7 +19,8 @@ public class GameContext : MonoBehaviour {
     public int playerPoints;
     private bool finished = false;
 
-    private static string timeTest = "Time left: ";
+    private static string timeText = "Time left: ";
+    private static string scoreText = "Score: ";
     public float seconds;
 
 
@@ -33,8 +35,9 @@ public class GameContext : MonoBehaviour {
     {
         if (seconds > 0)
         {
+            score.text = scoreText+ playerPoints;
             seconds -= Time.deltaTime;
-            text.text = timeTest + Mathf.Round(seconds);
+            text.text = timeText + Mathf.Round(seconds);
         }
         else if(!finished)
         {            
@@ -43,6 +46,13 @@ public class GameContext : MonoBehaviour {
         }
 
     }
+
+    public void AddPoint()
+    {
+        playerPoints++;
+        Debug.Log(playerPoints);
+    }
+
 
     private void FinishRound()
     {

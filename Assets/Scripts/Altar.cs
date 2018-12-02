@@ -17,6 +17,8 @@ public class Altar : MonoBehaviour
     GameObject _sacrifice;
     VictumTypes _victumType;
     TimeSpan _waitTime;
+    GameContext gameContext;
+    Transform body;
 
     enum AltarStates
     {
@@ -29,6 +31,7 @@ public class Altar : MonoBehaviour
     {
         _startStateTime = DateTime.Now;
         _altarState = AltarStates.Sleep;
+        gameContext = GetComponent<GameContext>();
     }
 
     void Update()
@@ -85,8 +88,9 @@ public class Altar : MonoBehaviour
         {
             case AltarStates.Process:
             {
-                _animator.SetTrigger("Process");
-                _animator.SetInteger("ProcessType", (int)_victumType);
+                    Debug.Log("process");
+                    _animator.SetTrigger("Process");
+                _animator.SetInteger("ProcessType", (int)_victumType);                               
                 break;
             }
             case AltarStates.Waiting:
