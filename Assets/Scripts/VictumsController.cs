@@ -8,8 +8,15 @@ public class VictumsController : MonoBehaviour {
 
     public static VictumsController instance;
 
+    [Serializable]
+    public class VictumPrefabs
+    {
+        public VictumTypes type;
+        public GameObject prefab;
+    }
+
     [SerializeField]
-    GameObject _victumPrefab;
+    VictumPrefabs[] _victumPrefab;
     [SerializeField]
     Transform[] _victumPlaces;
 
@@ -65,13 +72,22 @@ public class VictumsController : MonoBehaviour {
             Helpers.Shuffle(_nextVictums);
         }
 
-        GameObject victumBody = Instantiate(_victumPrefab, spawnPoint.position, Quaternion.identity, transform);
+        var victumType = _nextVictums[0];
+        _nextVictums.RemoveAt(0);
+        GameObject prefab = GetVictumPrefab(victumType);
+
+        GameObject victumBody = Instantiate(prefab, spawnPoint.position, Quaternion.identity, transform);
         _victums.Add(new Victum
         {
             body = victumBody.transform,
             spawnPoint = spawnPoint,
-            type = _nextVictums[0]
+            type = victumType
         });
         _nextVictums.RemoveAt(0);
+    }
+
+    public GameObject GetVictumPrefab(VictumTypes victumType)
+    {
+        return Array.Find(_victumPrefab, vp => vp.type == victumType).prefab;
     }
 }

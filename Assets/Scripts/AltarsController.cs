@@ -56,7 +56,7 @@ public class AltarsController : MonoBehaviour {
 
     Altar GetNextAltar()
     {
-        var sleepAltars = _altars.FindAll(a => a.IsSleep);
+        var sleepAltars = _altars.FindAll(a => a.IsSleep && !a.IsSpecial);
         return sleepAltars[_altarIndex++ % sleepAltars.Count];
     }
 

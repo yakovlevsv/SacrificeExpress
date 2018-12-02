@@ -75,10 +75,11 @@ public class CharacterController : MonoBehaviour {
             _victumInHands.body.position = _bodyPos.position;
             _victumInHands.body.parent = joinPoint;
 
-           Altar altar= AltarsController.instance.GetClosestAltar(transform.position, _pickUpDistance);
-
+           Altar altar = AltarsController.instance.GetClosestAltar(transform.position, _pickUpDistance);
             if (altar != null)
-            {            
+            {
+                if (altar.IsWaiting && altar.VictumType == _victumInHands.type)
+                {
                     _canThrow = true;
                     if (Input.GetButtonDown("Submit"))
                     {
@@ -86,10 +87,22 @@ public class CharacterController : MonoBehaviour {
                         Destroy(_victumInHands.body.gameObject);
                         _victumInHands = null;
                         _animator.SetBool("Carry", false);
-                    altar.RunProcess();
-                    GameContext.instance.AddPoint();
-                }              
-
+                        altar.RunProcess();
+                        GameContext.instance.AddPoint();
+                    }
+                }
+                if (altar.IsSpecial)
+                {
+                    _canThrow = true;
+                    if (Input.GetButtonDown("Submit"))
+                    {
+                        VictumsController.instance.KillVictum(_victumInHands);
+                        Destroy(_victumInHands.body.gameObject);
+                        _victumInHands = null;
+                        _animator.SetBool("Carry", false);
+                        altar.RunProcess();
+                    }
+                }
             }
         }
     }

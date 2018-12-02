@@ -5,20 +5,25 @@ using Random = UnityEngine.Random;
 
 public class Altar : MonoBehaviour
 {
+    public bool IsSpecial { get { return _special; } }
     public bool IsSleep { get { return _altarState == AltarStates.Sleep; } }
     public bool IsWaiting { get { return _altarState == AltarStates.Waiting; } }
     public VictumTypes VictumType { get { return _victumType; } }
 
     [SerializeField]
+    bool _special;
+    [SerializeField]
     Animator _animator;
+    [SerializeField]
+    Transform _victumRoot;
 
     AltarStates _altarState;
     DateTime _startStateTime;
     GameObject _sacrifice;
     VictumTypes _victumType;
     TimeSpan _waitTime;
-    GameContext gameContext;
     Transform body;
+    GameObject _waitObject;
 
     enum AltarStates
     {
@@ -31,7 +36,6 @@ public class Altar : MonoBehaviour
     {
         _startStateTime = DateTime.Now;
         _altarState = AltarStates.Sleep;
-        gameContext = GetComponent<GameContext>();
     }
 
     void Update()
@@ -53,6 +57,8 @@ public class Altar : MonoBehaviour
     {
         _waitTime = waitTime;
         _victumType = victumType;
+
+        _waitObject = Instantiate(VictumsController.instance.GetVictumPrefab(victumType), _victumRoot);
         ChangeState(AltarStates.Waiting);
     }
 
@@ -83,6 +89,12 @@ public class Altar : MonoBehaviour
     {
         _altarState = newAltarState;
         _startStateTime = DateTime.UtcNow;
+
+        if (newAltarState != AltarStates.Waiting && _waitObject != null)
+        {
+            Destroy(_waitObject);
+            _waitObject = null;
+        }
 
         switch (_altarState)
         {
