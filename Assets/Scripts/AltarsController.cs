@@ -60,6 +60,27 @@ public class AltarsController : MonoBehaviour {
         return sleepAltars[_altarIndex++ % sleepAltars.Count];
     }
 
+    public Altar GetClosestAltar(Vector3 position, float maxDistance)
+    {
+        if (_altars.Count == 0)
+            return null;
+
+        float minDistance = Helpers.GetDistance(_altars[0].transform.position, position);
+        int index = 0;
+        for (int i = 1; i < _altars.Count; i++)
+        {
+            float distance = Helpers.GetDistance(_altars[i].transform.position, position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                index = i;
+            }
+        }
+        return minDistance < maxDistance ? _altars[index] : null;
+    }
+
+
+
     VictumTypes GetNextVictum()
     {
         var types = (VictumTypes[])Enum.GetValues(typeof(VictumTypes));
