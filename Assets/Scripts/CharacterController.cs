@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour {
 
+
+    public Transform joinPoint;
     [SerializeField]
     Transform[] _altars;
     [SerializeField]
@@ -14,7 +16,7 @@ public class CharacterController : MonoBehaviour {
     Transform _bodyPos;
     [SerializeField]
     Animator _animator;
-
+    
     Rigidbody _rigidbody;
     Victum _victumInHands;
     bool _canPickUp;
@@ -66,8 +68,11 @@ public class CharacterController : MonoBehaviour {
                 }
             }
         } else
-        {
+        {           
+
             _victumInHands.body.position = _bodyPos.position;
+            _victumInHands.body.parent = joinPoint;
+               
 
             foreach (Transform alter in _altars)
             {

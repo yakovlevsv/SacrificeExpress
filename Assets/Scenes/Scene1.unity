@@ -737,7 +737,7 @@ MonoBehaviour:
   twoStarPoints: 2
   threeStarPoints: 3
   playerPoints: 3
-  seconds: 3
+  seconds: 90
 --- !u!4 &1023827678
 Transform:
   m_ObjectHideFlags: 0
@@ -800,6 +800,15 @@ Prefab:
       propertyPath: _altars.Array.data[1]
       value: 
       objectReference: {fileID: 2126728330}
+    - target: {fileID: 1163867695865864, guid: ddf8880986316ba4ba0412872f73bbd0, type: 2}
+      propertyPath: m_TagString
+      value: Chest
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937092985885672, guid: ddf8880986316ba4ba0412872f73bbd0,
+        type: 2}
+      propertyPath: joinPoint
+      value: 
+      objectReference: {fileID: 1558153433}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf8880986316ba4ba0412872f73bbd0, type: 2}
   m_IsPrefabAsset: 0
@@ -808,6 +817,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1714385160163594, guid: 7e1728ac3ff3df949925eae876604ba7,
     type: 2}
   m_PrefabInternal: {fileID: 449674380}
+--- !u!4 &1558153433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4795739062059830, guid: ddf8880986316ba4ba0412872f73bbd0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1317492376}
 --- !u!1001 &1694827715
 Prefab:
   m_ObjectHideFlags: 0
