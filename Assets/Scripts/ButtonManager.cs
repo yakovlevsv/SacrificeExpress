@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour {
 
-	public void NewGame()
+    private void Awake()
+    {
+        SoundManager.PlayMusic("BlackmoorColossus");
+    }
+
+    public void NewGame()
     {
         SceneManager.LoadScene("Scene1");
     }

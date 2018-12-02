@@ -57,6 +57,10 @@ public class VictumsController : MonoBehaviour {
 
     public void KillVictum(Victum victum)
     {
+        if (victum.type == VictumTypes.BigLady || victum.type == VictumTypes.BigMan)
+        {
+            SoundManager.PlaySoundUI("sacrifice");
+        }
         _victums.Remove(victum);
         SpawnNewVictum(victum.spawnPoint);
     }
